@@ -1,36 +1,27 @@
-from itertools import accumulate
-
 def main():
-    N, K = map(int,input().split())
-    A = list(map(int,input().split()))
+    S = input()
+    N = len(S)
+    res = [0] * N
+    for i in range(N-1):
+        if S[i] == 'R' and S[i+1] == 'L':
+            l, r, cnt = i, i+1, 0
+            while l >= 0 and S[l] == 'R':
+                if cnt % 2 == 0:
+                    res[i] += 1
+                else:
+                    res[i+1] += 1
+                cnt += 1
+                l -= 1
 
-    S = sum(A)
-    divisors = make_divisors(S)
-    
-    for d in divisors:
-        R = list(map(lambda x: x % d, A))
-        R = [r for r in R if r != 0]
-        R.sort()
-        cnt_m, cnt_p = 0, 0
-        for r in R:
-            if cnt_m <= K - r:
-                cnt_m += r
-            else:5
-                cnt_p += d - r
-        if cnt_m <= K and cnt_p <= K:
-            print(d)
-            exit()
-
-def make_divisors(n):
-    divisors = []
-    for i in range(1, int(n**0.5)+1):
-        if n % i == 0:
-            divisors.append(i)
-            if i != n // i:
-                divisors.append(n//i)
-
-    divisors.sort(reverse=True)
-    return divisors
+            cnt = 0
+            while r < N and S[r] == 'L':
+                if cnt % 2 == 0:
+                    res[i+1] += 1
+                else:
+                    res[i] += 1
+                cnt += 1
+                r += 1
+    print(" ".join([str(r) for r in res]))
 
 if __name__ == "__main__":
     main()
