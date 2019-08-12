@@ -1,6 +1,6 @@
-def main():
+def c():
     n = int(input())
-    strings =[input() for i in range(n)]
+    strings = [input() for i in range(n)]
 
     ans = {}
     count = 0
@@ -14,5 +14,6 @@ def main():
 
     print(count)
 
+
 if __name__ == "__main__":
-    main()
+    c()

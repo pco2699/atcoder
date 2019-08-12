@@ -1,6 +1,7 @@
 from heapq import heappush, heappop
- 
-def main():
+
+
+def d():
     n, m = map(int,input().split())
     
     jobs = []
@@ -21,6 +22,7 @@ def main():
         res -= heappop(h)
  
     print(res)
- 
+
+
 if __name__ == "__main__":
-    main()
+    d()
