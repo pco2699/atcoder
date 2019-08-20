@@ -1,40 +1,37 @@
 from collections import defaultdict
-
 def d():
     tree_map = defaultdict(list)
     value_map = defaultdict(int)
     N, Q = map(int,input().split())
- 
+    
     for _ in range(1, N):
         a, b = map(int,input().split())
         tree_map[a].append(b)
+        tree_map[b].append(a)
+
+    res = [0] * N
 
     for _ in range(1, Q+1):
         p, x = map(int,input().split())
-        value_map[p] += x
-
-    res = [0] * N
+        res[p-1] += x
+    
     stack = []
-    stack.append((1, 0))
+    stack.append((1, -1, 0))
+
     while stack:
-        i, s = stack.pop()
-        if value_map[i] != 0:
-            s += value_map[i]
-        res[i-1] = s
+        i, p, s = stack.pop()
+
+        res[i-1] += s
+        s = res[i-1]
         
         for j in tree_map[i]:
-            stack.append((j, s))
+            if j == p:
+                continue
+            else:
+                stack.append((j, i, s))
 
-    print(" ".join([str(r) for r in res]))
+    print(*res)
 
 
 if __name__ == "__main__":
     d()
-
-    
-        
-
-
-
-
-        
